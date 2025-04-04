@@ -14,7 +14,7 @@ public class HelloWorldService {
 
 		logger.debug("getDesc() is executed!");
 
-		return "Maven + Spring MVC + Docker Example By Mithun Tech";
+		return "GitHub, Maven, Jenkins, Docker, Kubernetes, Terraform, Amazon Web Services";
 
 	}
 
@@ -23,11 +23,10 @@ public class HelloWorldService {
 		logger.debug("getTitle() is executed! $name : {}", name);
 
 		if(StringUtils.isEmpty(name)){
-			return "Hello Docker From Mihtun Tech";
+			return "Hello from Mithun Technologies";
 		}else{
 			return "Hello " + name;
 		}
 		
 	}
-
 }

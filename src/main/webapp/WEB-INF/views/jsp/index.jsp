@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Project Name</a>
+			<a class="navbar-brand" href="#">Project</a>
 		</div>
 	</div>
 </nav>
@@ -40,15 +40,15 @@
 
 	<div class="row">
 		<div class="col-md-8">
-			<h2>Welcome To Mithun Technologies Private Limited, Banglore, Inida ,Karnataka.</h2>
-			<h3>Contact @ +91-9980923226,+91 - 9014996877</h3>
+			<h2>Welcome to Mithun Technologies Private Limited, Bengaluru, Karnataka, India</h2>
+			<h3>Contact @ +91 9980923216</h3>
 		</div>	
 	</div>
 
 
 	<hr>
 	<footer>
-		<p>&copy; Mithun Technologies 2024</p>
+		<p>&copy; Mithun Technologies 2025</p>
 	</footer>
 </div>
 
