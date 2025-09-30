@@ -48,7 +48,7 @@
 
 	<hr>
 	<footer>
-		<p>&copy; Mithun Technologies 2025</p>
+		<p>&copy; Navya Technologies 2025</p>
 	</footer>
 </div>
 
