@@ -1,6 +1,6 @@
 node
 {
-
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '1', artifactNumToKeepStr: '1', daysToKeepStr: '1', numToKeepStr: '5')), pipelineTriggers([pollSCM('* * * * *')])])
 stage("checkout")
 {
     git branch: 'main', credentialsId: 'GITHUB_ID', url: 'https://github.com/umanav03/java-web-app-jenkins-docker.git'
