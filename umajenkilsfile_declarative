@@ -1,0 +1,37 @@
+pipeline{
+    agent any
+     tools
+  {
+    maven 'maven 3.9'
+  }
+  triggers
+  {
+    pollSCM('* * * * *')
+  }
+  options
+  {
+    timestamps()
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))
+  }
+    
+    stages{
+        stage("chekout code"){
+            steps{
+                git branch: 'main', credentialsId: 'GITHUB_ID', url: 'https://github.com/umanav03/java-web-app-jenkins-docker.git'
+            }
+        }
+        stage("build"){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+        stage("deploy tomcat"){
+            steps{
+                 sshagent(['TOMCAT_SCPID']) {
+   sh "scp -o StrictHostKeyChecking=no target/java-web-app-1.0.war ubuntu@13.233.145.186:/opt/apache-tomcat-9.0.109/webapps/"
+               }
+            }
+        }
+    }
+}
+ 
