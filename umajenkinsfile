@@ -1,0 +1,20 @@
+node
+{
+
+stage("checkout")
+{
+    git branch: 'main', credentialsId: 'GITHUB_ID', url: 'https://github.com/umanav03/java-web-app-jenkins-docker.git'
+}
+stage("build")
+{
+    def mavenHome = tool name: "maven 3.9" , type: "maven"
+    def mavenCMD = "${mavenHome}/bin/mvn"
+    sh "${mavenCMD} clean package"
+}
+stage("deploye to tomcat")
+{
+    sshagent(['TOMCAT_SCPID']) {
+   sh "scp -o StrictHostKeyChecking=no target/java-web-app-1.0.war ubuntu@65.0.131.176:/opt/apache-tomcat-9.0.109/webapps/"
+}
+}
+}
