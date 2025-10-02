@@ -1,0 +1,33 @@
+node
+{
+    properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '1', artifactNumToKeepStr: '1', daysToKeepStr: '1', numToKeepStr: '3')), pipelineTriggers([pollSCM('* * * * *')])])
+    def buildNumber = "${BUILD_NUMBER}"
+    stage("git clone")
+    {
+        git url: "https://github.com/umanav03/java-web-app-jenkins-docker.git" , branch: "main"
+    }
+    stage("build")
+    {
+        def mavenHome = tool name: "maven 3.9"
+        sh "${mavenHome}/bin/mvn clean package"
+    }
+    stage("docker build image ")
+    {
+        sh "docker build -t dockeruma03/java-web-apps:${buildNumber} ."
+    }
+    stage("docker login and push")
+    {
+        withCredentials([string(credentialsId: 'DOCKERHUB_pass', variable: 'DOCKERHUB_pass')]) {
+    sh "docker login -u dockeruma03 -p ${DOCKERHUB_pass}"
+}
+      sh "docker push dockeruma03/java-web-apps:${buildNumber}"  
+    }
+    stage("deploy app")
+    {
+        sshagent(['DEPLOY_server']) {
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@13.204.47.229 docker rm -f javawebappcontainer || true "
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@13.204.47.229  docker run -d --name javawebappcontainer -p 9090:8080 dockeruma03/java-web-apps:${buildNumber}"
+        }
+       
+    }
+}
