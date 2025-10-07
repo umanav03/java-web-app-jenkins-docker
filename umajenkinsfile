@@ -14,7 +14,7 @@ stage("build")
 stage("deploye to tomcat")
 {
     sshagent(['TOMCAT_SCPID']) {
-   sh "scp -o StrictHostKeyChecking=no target/java-web-app-1.0.war ubuntu@13.233.145.186:/opt/apache-tomcat-9.0.109/webapps/"
+   sh "scp -o StrictHostKeyChecking=no target/java-web-app-1.0.war ubuntu@152.66.153.28:/opt/apache-tomcat-9.0.109/webapps/"
 }
 }
 }
